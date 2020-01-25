@@ -19,5 +19,5 @@ Route::post('/upload', function (Request $request) {
 	// image/png
 	// return $file->getMimeType();
 
-	$file->move('uploads', $file->getClientOriginalName());
+	$file->move('uploads/foo/bar/baz', $file->getClientOriginalName());
 });
