@@ -13,5 +13,8 @@ Route::post('/upload', function (Request $request) {
 	// /tmp/phpBoaM13
 	// return $file->getRealPath();
 
-	return $file->getSize();
+	// 51329 b
+	// return $file->getSize();
+
+	return $file->getMimeType();
 });
