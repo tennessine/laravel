@@ -2,8 +2,6 @@
 
 use Illuminate\Http\Request;
 
-Route::get('/user', function (Request $request) {
-	return [
-		'name' => 'musikar',
-	];
+Route::post('/upload', function (Request $request) {
+	info($request->all());
 });
