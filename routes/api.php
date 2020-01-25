@@ -16,5 +16,8 @@ Route::post('/upload', function (Request $request) {
 	// 51329 b
 	// return $file->getSize();
 
-	return $file->getMimeType();
+	// image/png
+	// return $file->getMimeType();
+
+	$file->move('uploads', $file->getClientOriginalName());
 });
