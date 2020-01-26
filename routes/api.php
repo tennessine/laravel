@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 
-Route::post('/upload', function (Request $request) {
+Route::post('/upload', function (Request $request, GuzzleHttp\Client $client) {
 	$file = $request->file('file');
 
 	// wx9272a2c1b71081f4.o6zAJszrdmwFQCryome-HIFrEQaI.cFCK7ArKXwFm0e65e9c559c051ee27aaa2c23730b825.png
@@ -26,5 +26,15 @@ Route::post('/upload', function (Request $request) {
 
 Route::post('/login', function (Request $request) {
 	$code = $request->code;
-	return $code;
+
+	$response = $client->request('GET', 'https://api.weixin.qq.com/sns/jscode2session', [
+		'query' => [
+			'appid' => config('miniprogram.AppID'),
+			'secret' => config('miniprogram.AppSecret'),
+			'js_code' => $code,
+			'grant_type' => 'authorization_code',
+		],
+	]);
+
+	return $response->getStatusCode();
 });
