@@ -5,8 +5,6 @@ use Illuminate\Http\Request;
 Route::post('/upload', function (Request $request) {
 	$file = $request->file('file');
 
-	info($request->user);
-
 	// wx9272a2c1b71081f4.o6zAJszrdmwFQCryome-HIFrEQaI.cFCK7ArKXwFm0e65e9c559c051ee27aaa2c23730b825.png
 	// $file->getClientOriginalName();
 
@@ -24,4 +22,9 @@ Route::post('/upload', function (Request $request) {
 
 	// upload
 	// $file->move('uploads/foo/bar/baz', $file->getClientOriginalName());
+});
+
+Route::post('/login', function (Request $request) {
+	$code = $request->code;
+	return $code;
 });
