@@ -27,7 +27,7 @@ Route::post('/upload', function (Request $request) {
 Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 	$response = $client->request('GET', 'https://api.weixin.qq.com/sns/jscode2session', [
 		'query' => [
-			'appid1' => config('miniprogram.AppID'),
+			'appid' => config('miniprogram.AppID'),
 			'secret' => config('miniprogram.AppSecret'),
 			'js_code' => $request->code,
 			'grant_type' => 'authorization_code',
@@ -37,7 +37,7 @@ Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 	if (array_key_exists('errcode', $result) && array_key_exists('errmsg', $result)) {
 		return [
 			'code' => $result['errcode'],
-			'errmsg' => $result['errerrmsg'],
+			'errmsg' => $result['errmsg'],
 		];
 	}
 	$session_key = $result['session_key'];
