@@ -29,7 +29,7 @@ Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 		'query' => [
 			'appid' => config('miniprogram.AppID'),
 			'secret' => config('miniprogram.AppSecret'),
-			'js_code' => $request->code,
+			'js_code' => 'xss',
 			'grant_type' => 'authorization_code',
 		],
 	]);
