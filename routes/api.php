@@ -36,6 +36,6 @@ Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 		],
 	]);
 
-	$result = \Guzzle\json_decode($response->getbody()->getContents(), true);
+	$result = \GuzzleHttp\json_decode($response->getbody()->getContents(), true);
 	info($result);
 });
