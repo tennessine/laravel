@@ -36,5 +36,9 @@ Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 		],
 	]);
 
+	// openid: "o_Gtt5R6PfG22CVoJxtzRo5dwzh4"
+	// session_key: "ldDmNC/0mBrbJocqE2j4Mg=="
+
+	info(gettype($response->getBody()));
 	return $response->getBody();
 });
