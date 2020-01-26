@@ -36,7 +36,7 @@ Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 	$result = \GuzzleHttp\json_decode($response->getbody()->getContents(), true);
 	if (array_key_exists('errcode', $result) && array_key_exists('errmsg', $result)) {
 		return [
-			'code' => $result['errcode'],
+			'errcode' => $result['errcode'],
 			'errmsg' => $result['errmsg'],
 		];
 	}
