@@ -27,13 +27,14 @@ Route::post('/upload', function (Request $request) {
 Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 	$response = $client->request('GET', 'https://api.weixin.qq.com/sns/jscode2session', [
 		'query' => [
-			'appid' => config('miniprogram.AppID'),
+			'appid1' => config('miniprogram.AppID'),
 			'secret' => config('miniprogram.AppSecret'),
 			'js_code' => $request->code,
 			'grant_type' => 'authorization_code',
 		],
 	]);
 	$result = \GuzzleHttp\json_decode($response->getbody()->getContents(), true);
+	info($result);
 	$session_key = $result['session_key'];
 	$openid = $result['openid'];
 });
