@@ -36,5 +36,5 @@ Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 		],
 	]);
 
-	return $response->getStatusCode();
+	return $response->getBody();
 });
