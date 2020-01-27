@@ -25,11 +25,12 @@ Route::post('/upload', function (Request $request) {
 });
 
 Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
+	info($request->all());
 	$response = $client->request('GET', 'https://api.weixin.qq.com/sns/jscode2session', [
 		'query' => [
 			'appid' => config('miniprogram.AppID'),
 			'secret' => config('miniprogram.AppSecret'),
-			'js_code' => 'xss',
+			'js_code' => $request->code,
 			'grant_type' => 'authorization_code',
 		],
 	]);
