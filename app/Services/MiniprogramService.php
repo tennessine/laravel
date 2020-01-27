@@ -2,12 +2,14 @@
 
 namespace App\Services;
 
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
 
 // openid: o_Gtt5R6PfG22CVoJxtzRo5dwzh4
 
 class MiniprogramService {
-	public function getAccessToken(GuzzleHttp\Client $client) {
+	public function getAccessToken() {
+		$client = new Client();
 		if (!Cache::has('access_token')) {
 			$response = $client->request('GET', 'https://api.weixin.qq.com/cgi-bin/token', [
 				'query' => [
