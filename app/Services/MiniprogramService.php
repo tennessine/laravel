@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Cache;
 class MiniprogramService {
 	private $client;
 
-	public function __construct(GuzzleHttp\Client $client) {
+	public function __construct(\GuzzleHttp\Client $client) {
 		$this->client = $client;
 	}
 
@@ -49,7 +49,7 @@ class MiniprogramService {
 			],
 		]);
 
-		$result = GuzzleHttp\json_decode($response->getbody()->getContents(), true);
+		$result = \GuzzleHttp\json_decode($response->getbody()->getContents(), true);
 		if (array_key_exists('errcode', $result) && array_key_exists('errmsg', $result)) {
 			return [
 				'errcode' => $result['errcode'],
