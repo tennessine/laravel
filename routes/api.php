@@ -24,6 +24,10 @@ Route::post('/upload', function (Request $request) {
 	// $file->move('uploads/foo/bar/baz', $file->getClientOriginalName());
 });
 
+Route::get('/getAccessToken', function (App\Services\MiniprogramService $miniprogramService) {
+	return $miniprogramService->getAccessToken();
+});
+
 Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 	$response = $client->request('GET', 'https://api.weixin.qq.com/sns/jscode2session', [
 		'query' => [
