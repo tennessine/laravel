@@ -25,7 +25,6 @@ Route::post('/upload', function (Request $request) {
 });
 
 Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
-	info($request->code);
 	$response = $client->request('GET', 'https://api.weixin.qq.com/sns/jscode2session', [
 		'query' => [
 			'appid' => config('miniprogram.AppID'),
@@ -43,4 +42,5 @@ Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
 	}
 	$session_key = $result['session_key'];
 	$openid = $result['openid'];
+	return $result;
 });
