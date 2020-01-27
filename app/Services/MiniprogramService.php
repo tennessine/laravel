@@ -7,10 +7,16 @@ use Illuminate\Support\Facades\Cache;
 // openid: o_Gtt5R6PfG22CVoJxtzRo5dwzh4
 
 class MiniprogramService {
+	private $client;
+
+	public function __construct(\GuzzleHttp\Client $client) {
+		$this->client = $client;
+	}
+
 	public function getAccessToken() {
 		$client = new \GuzzleHttp\Client();
 		if (!Cache::has('access_token')) {
-			$response = $client->request('GET', 'https://api.weixin.qq.com/cgi-bin/token', [
+			$response = $this->client->request('GET', 'https://api.weixin.qq.com/cgi-bin/token', [
 				'query' => [
 					'appid' => config('miniprogram.AppID'),
 					'secret' => config('miniprogram.AppSecret'),
@@ -32,5 +38,9 @@ class MiniprogramService {
 		}
 
 		return cache('access_token');
+	}
+
+	public function subscribeMessageSend() {
+
 	}
 }
