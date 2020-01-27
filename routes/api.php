@@ -26,6 +26,10 @@ Route::post('/upload', function (Request $request) {
 
 Route::get('/subscribeMessageSend', function (App\Services\MiniprogramService $miniprogramService) {
 
+	$openid = 'o_Gtt5R6PfG22CVoJxtzRo5dwzh4';
+	$template_id = '4SrCs6shl1GOqrLvVd29To3abvd0L-IRBLk_X6JXisA';
+	$page = '/pages/index/index';
+
 	$data = [
 		'thing1' => [
 			'value' => 'test',
@@ -35,7 +39,7 @@ Route::get('/subscribeMessageSend', function (App\Services\MiniprogramService $m
 		],
 	];
 
-	return $miniprogramService->subscribeMessageSend('o_Gtt5R6PfG22CVoJxtzRo5dwzh4', '4SrCs6shl1GOqrLvVd29To3abvd0L-IRBLk_X6JXisA', '/pages/index/index', $data);
+	return $miniprogramService->subscribeMessageSend($openid, $template_id, $page, $data);
 });
 
 Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
