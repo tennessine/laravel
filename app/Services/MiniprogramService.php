@@ -4,8 +4,6 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Cache;
 
-// openid: o_Gtt5R6PfG22CVoJxtzRo5dwzh4
-
 class MiniprogramService {
 	private $client;
 
@@ -14,7 +12,6 @@ class MiniprogramService {
 	}
 
 	public function getAccessToken() {
-		$client = new \GuzzleHttp\Client();
 		if (!Cache::has('access_token')) {
 			$response = $this->client->request('GET', 'https://api.weixin.qq.com/cgi-bin/token', [
 				'query' => [
@@ -40,7 +37,26 @@ class MiniprogramService {
 		return cache('access_token');
 	}
 
-	public function subscribeMessageSend() {
+	public function subscribeMessageSend($openid, $template_id, $page = null, $data = []) {
 
+		$response = $this->client->request('POST', 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send', [
+			'form_params' => [
+				'access_token' => $this->getAccessToken(),
+				'touser' => $openid,
+				'template_id' => $template_id,
+				'page' => $page,
+				'data' => $data,
+			],
+		]);
+
+		$result = \GuzzleHttp\json_decode($response->getbody()->getContents(), true);
+		if (array_key_exists('errcode', $result) && array_key_exists('errmsg', $result)) {
+			return [
+				'errcode' => $result['errcode'],
+				'errmsg' => $result['errmsg'],
+			];
+		}
+
+		return $result;
 	}
 }

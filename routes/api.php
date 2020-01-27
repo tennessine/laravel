@@ -24,8 +24,11 @@ Route::post('/upload', function (Request $request) {
 	// $file->move('uploads/foo/bar/baz', $file->getClientOriginalName());
 });
 
-Route::get('/getAccessToken', function (App\Services\MiniprogramService $miniprogramService) {
-	return $miniprogramService->getAccessToken();
+Route::get('/subscribeMessageSend', function (App\Services\MiniprogramService $miniprogramService) {
+
+	$data = [];
+
+	$miniprogramService->subscribeMessageSend('o_Gtt5R6PfG22CVoJxtzRo5dwzh4', '4SrCs6shl1GOqrLvVd29To3abvd0L-IRBLk_X6JXisA', '/pages/index/index', $data);
 });
 
 Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
