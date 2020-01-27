@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Cache;
 
 class MiniprogramService {
@@ -39,15 +40,15 @@ class MiniprogramService {
 
 	public function subscribeMessageSend($openid, $template_id, $page = null, $data = []) {
 
-		$response = $this->client->request('POST', 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send', [
-			'form_params' => [
-				'access_token' => $this->getAccessToken(),
-				'touser' => $openid,
-				'template_id' => $template_id,
-				'page' => $page,
-				'data' => $data,
-			],
-		]);
+		$params = [
+			'access_token' => $this->getAccessToken(),
+			'touser' => $openid,
+			'template_id' => $template_id,
+			'page' => $page,
+			'data' => $data,
+		];
+
+		return $this->client->send(new Request('POST', 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send', [], json_encode($params)));
 
 		$result = \GuzzleHttp\json_decode($response->getbody()->getContents(), true);
 		if (array_key_exists('errcode', $result) && array_key_exists('errmsg', $result)) {
