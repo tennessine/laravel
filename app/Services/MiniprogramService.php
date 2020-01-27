@@ -41,15 +41,14 @@ class MiniprogramService {
 	public function subscribeMessageSend($openid, $template_id, $page = null, $data = []) {
 
 		$params = [
-			'access_token' => $this->getAccessToken(),
 			'touser' => $openid,
 			'template_id' => $template_id,
 			'page' => $page,
 			'data' => $data,
 		];
 
-		$response = $this->client->post('https://api.weixin.qq.com/cgi-bin/message/subscribe/send', [
-			'body' => json_encode($params),
+		$response = $this->client->post(sprintf('https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=%s', $this->getAccessToken()), [
+			'json' => $params,
 		]);
 
 		$result = \GuzzleHttp\json_decode($response->getbody()->getContents(), true);
