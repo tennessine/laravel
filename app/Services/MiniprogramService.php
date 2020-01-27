@@ -48,7 +48,9 @@ class MiniprogramService {
 			'data' => $data,
 		];
 
-		return $this->client->send(new Request('POST', 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send', [], json_encode($params)));
+		$response = $this->client->post('https://api.weixin.qq.com/cgi-bin/message/subscribe/send', [
+			'body' => json_encode($params),
+		]);
 
 		$result = \GuzzleHttp\json_decode($response->getbody()->getContents(), true);
 		if (array_key_exists('errcode', $result) && array_key_exists('errmsg', $result)) {
