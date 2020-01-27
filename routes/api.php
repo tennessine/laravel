@@ -28,7 +28,7 @@ Route::get('/subscribeMessageSend', function (App\Services\MiniprogramService $m
 
 	$data = [];
 
-	$miniprogramService->subscribeMessageSend('o_Gtt5R6PfG22CVoJxtzRo5dwzh4', '4SrCs6shl1GOqrLvVd29To3abvd0L-IRBLk_X6JXisA', '/pages/index/index', $data);
+	return $miniprogramService->subscribeMessageSend('o_Gtt5R6PfG22CVoJxtzRo5dwzh4', '4SrCs6shl1GOqrLvVd29To3abvd0L-IRBLk_X6JXisA', '/pages/index/index', $data);
 });
 
 Route::post('/login', function (Request $request, GuzzleHttp\Client $client) {
